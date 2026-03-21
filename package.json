@@ -1,0 +1,44 @@
+{
+  "name": "voicebridge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "electron/main.js",
+  "scripts": {
+    "dev:whisper": "docker run --rm -p 9000:9000 -e ASR_ENGINE=faster_whisper -e ASR_MODEL=small onerahmet/openai-whisper-asr-webservice:latest",
+    "dev": "concurrently -k \"node server/server.js\" \"vite --strictPort\"",
+    "dev:all": "npm run dev",
+    "dev:core": "vite",
+    "dev:desktop": "wait-on http://localhost:5173 && node scripts/run-electron.js .",
+    "dev:web": "vite",
+    "dev:web:all": "npm run dev",
+    "dev:desktop:all": "concurrently -k \"node server/server.js\" \"vite --strictPort\" \"wait-on http://localhost:5173 && node scripts/run-electron.js .\"",
+    "dev:api": "node server/server.js",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "vite",
+    "electron": "node scripts/run-electron.js .",
+    "postinstall": "node scripts/patch-vite-net-use.js --if-present 2>nul || exit 0 && node scripts/unblock-electron.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "axios": "^1.7.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.3.1",
+    "electron": "^40.8.0",
+    "express": "^5.2.1",
+    "node-fetch": "^3.3.2",
+    "openai": "^6.27.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "socket.io": "^4.8.3",
+    "socket.io-client": "^4.8.3"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "vite": "^7.3.1",
+    "wait-on": "^9.0.4"
+  }
+}

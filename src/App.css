@@ -1,0 +1,288 @@
+:root {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, Segoe UI, Arial, sans-serif;
+  background: linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+  color: #0f172a;
+}
+
+.app-container {
+  min-height: 100vh;
+  padding: 24px;
+}
+
+.app-shell {
+  max-width: 1050px;
+  margin: 0 auto;
+  background: #ffffffcc;
+  backdrop-filter: blur(4px);
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 12px 36px rgba(15, 23, 42, 0.08);
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 2.1rem;
+}
+
+.subtitle {
+  margin: 6px 0 0;
+  color: #475569;
+}
+
+.badges-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.status-badge.connected {
+  background: #e7f8ee;
+  color: #18794e;
+  border: 1px solid #b7ebcc;
+}
+
+.status-badge.disconnected {
+  background: #ffecec;
+  color: #b42318;
+  border: 1px solid #ffcdc9;
+}
+
+.status-badge.speaking {
+  background: #eef4ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+}
+
+.status-badge.idle {
+  background: #f3f4f6;
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+
+.desktop-note {
+  text-align: center;
+  color: #64748b;
+  margin: 0 0 12px;
+}
+
+.controls-row {
+  margin-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+button {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+button:hover:not(:disabled) {
+  border-color: #94a3b8;
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  background-color: #e5e7eb;
+  color: #94a3b8;
+  cursor: not-allowed;
+}
+
+.primary-btn {
+  background: #111827;
+  color: #ffffff;
+  border-color: #111827;
+}
+
+.primary-btn:hover:not(:disabled) {
+  background: #1f2937;
+}
+
+.lang-toggle {
+  display: inline-flex;
+  border: 1px solid #d1d5db;
+  border-radius: 999px;
+  overflow: hidden;
+  background: #f8fafc;
+}
+
+.lang-option {
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  padding: 8px 14px;
+  font-size: 14px;
+  background: transparent;
+}
+
+.lang-option.active {
+  background: #0f172a;
+  color: #ffffff;
+}
+
+.card {
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 14px;
+  background: #ffffff;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.04);
+}
+
+.tts-controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.tts-controls label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 13px;
+  gap: 6px;
+  color: #334155;
+}
+
+.tts-controls select {
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+}
+
+.tts-controls input[type="range"] {
+  width: 100%;
+}
+
+.output {
+  margin: 14px 0;
+}
+
+.summary {
+  margin: 14px 0;
+}
+
+.summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.summary-header h2 {
+  margin: 0;
+}
+
+.summary h3 {
+  margin: 12px 0 8px;
+}
+
+.summary-text {
+  margin: 0 0 8px;
+  color: #0f172a;
+}
+
+.summary-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 8px 0 10px;
+  color: #334155;
+  font-size: 13px;
+}
+
+.muted {
+  color: #64748b;
+  margin: 8px 0;
+}
+
+.output-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.output-row span {
+  color: #64748b;
+}
+
+.output-row strong {
+  text-align: right;
+}
+
+.error-text {
+  color: #b42318;
+  margin: 8px 0 0;
+}
+
+.history {
+  margin-top: 8px;
+}
+
+.history h2 {
+  margin: 0 0 12px;
+}
+
+.history ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.history li {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 12px;
+  background-color: #f8fafc;
+}
+
+.history li p {
+  margin: 6px 0;
+}
+
+.history-actions {
+  margin-top: 8px;
+}
+
+.small-action-btn {
+  padding: 5px 10px;
+  font-size: 12px;
+  margin: 0;
+}

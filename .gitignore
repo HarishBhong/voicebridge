@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.env
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Electron build artifacts (keep electron/ source tracked)
+dist-electron/
+out/
+release/
+*.asar
