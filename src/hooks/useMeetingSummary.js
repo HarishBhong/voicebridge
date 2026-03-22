@@ -51,6 +51,7 @@ const buildLocalSummary = (entries) => {
   const summary = `Conversation contains ${validEntries.length} translated exchanges (${enToJa} EN→JP, ${jaToEn} JP→EN). Recent discussion focused on live bilingual communication${actionItems.length > 0 ? " with actionable follow-ups identified." : "."}`;
 
   return {
+    mode: "local-fallback",
     summary,
     highlights,
     topics,
@@ -83,6 +84,7 @@ export const useMeetingSummary = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          mode: String(import.meta.env.VITE_SUMMARY_MODE || "deterministic").toLowerCase(),
           entries: history.map((entry) => ({
             speech: entry.speech,
             translation: entry.translation,

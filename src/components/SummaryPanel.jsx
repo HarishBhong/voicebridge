@@ -14,6 +14,7 @@ const SummaryPanel = ({ summaryData, summaryLoading, summaryError, onGenerateSum
 
       {summaryData ? (
         <>
+          {summaryData.mode ? <p className="muted">Mode: {summaryData.mode}</p> : null}
           <p className="summary-text">{summaryData.summary}</p>
 
           <div className="summary-stats">

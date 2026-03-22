@@ -5,6 +5,65 @@ This file tracks the development progress of the VoiceBridge project, including 
 
 ---
 
+### March 21, 2026
+
+#### Task: Phase 5 Quality Upgrade — Semantic-Lite Summary Mode (No-Billing)
+- **Objective**: Improve meeting-summary usefulness while keeping deterministic behavior as safe fallback and avoiding paid model dependency.
+- **Problems Encountered**:
+  1. Existing summary output was structurally correct but often too generic for longer conversations.
+  2. Quality enhancement needed to stay free/local and not require paid API usage.
+  3. Upgrade had to preserve prior endpoint/UI behavior to avoid regressions.
+- **How It Was Solved**:
+  1. Added backend summary mode handling via `mode` request field (default deterministic).
+  2. Implemented `semantic-lite` summarization in `summaryService` using local token-frequency scoring and ranked highlights.
+  3. Kept deterministic summary path as guaranteed fallback for compatibility and reliability.
+  4. Updated frontend summary hook to send mode preference (`VITE_SUMMARY_MODE`) and preserve local fallback behavior.
+  5. Updated summary UI to display active summary mode (`deterministic`, `semantic-lite`, `local-fallback`).
+- **Outcome**:
+  - Summary generation now supports a richer local mode without external billing.
+  - Existing summary flow remains stable with explicit fallback behavior.
+
+#### Task: Runtime Strategy Pivot — Browser-First Delivery with Optional Electron
+- **Objective**: Reduce recurring desktop instability impact by making browser runtime the default while preserving desktop capability for later validation.
+- **Problems Encountered**:
+  1. Repeated Electron runtime friction in day-to-day development, including unstable speech/transcribe behavior in desktop test cycles.
+  2. Default startup command led to Electron-first execution, increasing failure frequency for normal testing.
+  3. User onboarding risk: new users could hit desktop-specific issues before verifying core translator flow.
+- **How It Was Solved**:
+  1. Switched default development flow to browser-first (`npm run dev` starts backend + Vite).
+  2. Preserved Electron as optional paths (`npm run dev:desktop`, `npm run dev:desktop:all`) instead of removing desktop support.
+  3. Updated README run instructions to clearly mark desktop mode as optional.
+  4. Added Electron artifact ignores (`dist-electron/`, `out/`, `release/`, `*.asar`) while keeping `electron/` source tracked.
+- **Outcome**:
+  - Core translation testing now follows the most stable path by default.
+  - Electron remains available for future desktop hardening without blocking Phase 1 delivery.
+
+#### Task: GitHub Operations Kickoff — Repository + PR Workflow Setup
+- **Objective**: Start production-style collaboration workflow with branch protection and PR-first development.
+- **Problems Encountered**:
+  1. Need to convert local codebase into maintainable remote workflow without breaking momentum.
+  2. Uncertainty about next operational steps after initial commit.
+- **How It Was Solved**:
+  1. Initialized Git repository, committed baseline, and moved to `main` branch.
+  2. Documented PR-first workflow guidance (feature branches, PR review, squash merge, branch cleanup).
+  3. Began branch protection setup for `main` to enforce pull-request-based merges.
+- **Outcome**:
+  - Project now has a maintainable collaboration path aligned with real-world team practice.
+
+#### Next Steps (Execution Order)
+1. **Stabilize browser runtime path (priority)**:
+   - Run `npm run dev` and verify end-to-end speech → translation cycle in browser.
+   - Confirm backend health at `/health` and translation provider visibility at `/translation/config`.
+2. **Validate semantic summary mode**:
+  - Set `VITE_SUMMARY_MODE=semantic-lite` and compare summary quality against deterministic mode.
+  - Confirm summary mode label renders correctly in UI.
+3. **Desktop re-validation (deferred, optional)**:
+   - Re-test Electron via `npm run dev:desktop` only after browser path is consistently stable.
+4. **Phase 6 next increment planning**:
+  - Design offline Piper TTS bridge API and voice metadata contract before implementation.
+
+---
+
 ### March 15, 2026
 
 #### Task: Runtime Verification + UX Signal Reliability Hardening
