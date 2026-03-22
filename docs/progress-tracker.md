@@ -12,7 +12,8 @@
 
 ### Phase 2: Desktop Application
 - [x] Electron wrapper (loads app, IPC preload in place)
-- [x] Single command launch (`npm run dev` starts Electron)
+- [x] Desktop launch command in place (`npm run dev:desktop`)
+- [x] Browser-first default run path (`npm run dev` starts backend + Vite)
 - [x] Desktop connectivity indicator (API connected/disconnected status)
 - [x] Runtime status reliability hardening (socket badge accuracy + speech provider labeling clarity)
 - [ ] Speech recognition inside Electron (Web Speech API blocked in Electron dev builds — deferred to Phase 6 Whisper integration)
@@ -32,6 +33,7 @@
 - [x] Meeting summaries (local summary endpoint + UI generation)
 - [x] Action item detection
 - [x] Topic extraction
+- [x] Optional semantic summary mode (`semantic-lite`) with deterministic fallback
 
 ### Phase 6: Local AI Models
 - [x] Whisper speech recognition foundation (API route + frontend fallback path scaffold)
@@ -49,10 +51,11 @@
 
 ## Immediate Next Steps
 
-1. Configure one speech transcription provider in backend `.env` (`OPENAI_API_KEY` or `WHISPER_API_URL`) and verify `/speech/config` shows `configured: true`.
-2. Re-run desktop smoke test and confirm no repeated `/speech/transcribe` 503 requests.
-3. Validate translation provider proof via WebSocket `translation` payload `provider` field.
-4. Plan summary quality upgrade path (semantic mode + deterministic fallback).
+1. Use browser-first validation flow (`npm run dev`) and confirm stable speech → translation behavior in web mode.
+2. Configure one speech transcription provider in backend `.env` (`OPENAI_API_KEY` or `WHISPER_API_URL`) and verify `/speech/config` shows `configured: true`.
+3. Validate semantic summary mode by setting `VITE_SUMMARY_MODE=semantic-lite` and generating summaries from realistic history.
+4. Re-run optional desktop smoke test (`npm run dev:desktop`) and confirm no repeated `/speech/transcribe` 503 requests.
+5. Plan Phase 6 next increment: offline Piper TTS backend bridge design (API contract + voice selection schema).
 
 ---
 

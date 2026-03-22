@@ -2,9 +2,11 @@ const { buildConversationSummary } = require('../services/summaryService');
 
 const generateSummary = (req, res) => {
   const entries = Array.isArray(req.body?.entries) ? req.body.entries : [];
+  const mode = String(req.body?.mode || process.env.SUMMARY_MODE || 'deterministic').trim().toLowerCase();
 
   if (entries.length === 0) {
     return res.status(400).json({
+      mode,
       summary: 'No transcript entries provided.',
       highlights: [],
       topics: [],
@@ -13,7 +15,7 @@ const generateSummary = (req, res) => {
     });
   }
 
-  const summaryData = buildConversationSummary(entries);
+  const summaryData = buildConversationSummary(entries, { mode });
   return res.json(summaryData);
 };
 
